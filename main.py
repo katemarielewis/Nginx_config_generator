@@ -4,7 +4,9 @@ def check_port(port):
     if port.isdigit():
         print("You entered", port)
     elif port=="help":
-        pass
+        print("This is a help message")
+        port=input("Please enter an integer for the port: ")
+        check_port(port)
     elif port=="exit":
         pass
     else:
@@ -18,7 +20,9 @@ def check_root_directory(root_directory):
     if os.path.isdir(root_directory):
         print("You entered the directory", root_directory)
     elif root_directory=="help":
-        pass
+        print("This is a help message")
+        root_directory=input("Please enter a valid directory for the root directory of the site: ")
+        check_root_directory(root_directory)
     elif root_directory=="exit":
         pass
     else:
@@ -38,7 +42,9 @@ def check_extensions(site_url):
     if valid_extension==True:
         print("You entered the site URL", site_url)
     elif site_url=="help":
-        pass
+        print("This is a help message")
+        site_url=input("Please enter a valid URL for the site to be displayed on: ")
+        check_extensions(site_url)
     elif site_url=="exit":
         pass
     else:
@@ -47,11 +53,14 @@ def check_extensions(site_url):
     return site_url
 
 def check_php_fpm(php_fpm):
+    configured_tcp_unix=""
     if php_fpm=="Y":
        configured_tcp_unix=input("is it configured to use tcp port or unix socket? Please answer using tcp/unix ")
        configured_tcp_unix=check_configured_tcp_unix(configured_tcp_unix)
     elif php_fpm=="help":
-        pass
+        print("This is a help message")
+        input_php_fpm=input("please use Y/N to answer: ")
+        check_php_fpm(input_php_fpm)
     elif php_fpm=="exit":
         pass
     elif php_fpm=="N":
@@ -63,16 +72,18 @@ def check_php_fpm(php_fpm):
 
 def check_configured_tcp_unix(configured_tcp_unix):
     if configured_tcp_unix=="tcp":
-       configured_tcp_unix="127.0.0.1:9000"
+        configured_tcp_unix="127.0.0.1:9000"
     elif configured_tcp_unix=="help":
-        pass
+        print("This is a help message")
+        configured_tcp_unix=input("please use tcp/unix to answer: ")
+        configured_tcp_unix=check_configured_tcp_unix(configured_tcp_unix)
     elif configured_tcp_unix=="exit":
         pass
     elif configured_tcp_unix=="unix":
         configured_tcp_unix="/var/run/php-fpm.sock"
     else:
         configured_tcp_unix=input("please use tcp/unix to answer: ")
-        check_configured_tcp_unix(configured_tcp_unix)
+        configured_tcp_unix=check_configured_tcp_unix(configured_tcp_unix)
     return configured_tcp_unix
 
 
@@ -83,7 +94,9 @@ def check_php_files(php_files):
         php_fpm=input("will the site use php-fpm? Please answer using Y/N ")
         php_fpm, configured_tcp_unix=check_php_fpm(php_fpm)
     elif php_files=="help":
-        pass
+        print("This is a help message")
+        php_files=input("Please answer using Y/N: ")
+        check_php_files(php_files)
     elif php_files=="exit":
         pass
     elif php_files=="N":
